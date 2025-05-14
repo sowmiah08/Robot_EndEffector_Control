@@ -236,8 +236,8 @@ def update(frame):
     x3 = x2 + L3 * np.cos(theta[0] + theta[1] + theta[2])
     y3 = y2 + L3 * np.sin(theta[0] + theta[1] + theta[2])
 
-    target_dot.set_data(x_t, y_t)
-    ee_dot.set_data(x_e, y_e)
+    target_dot.set_data([x_t], [y_t])
+    ee_dot.set_data([x_e], [y_e])
     line.set_data([0, x1, x2, x3], [0, y1, y2, y3])
     path.set_data(ee_x[:frame], ee_y[:frame])
 
@@ -262,7 +262,7 @@ ani = animation.FuncAnimation(
     blit=True,
     interval=1000 / control_rate
 )
-# ani.save("rrr_animation.mp4", writer="ffmpeg", fps=30)
+
 ax.plot(X_control, Y_control, 'g:', linewidth=1.5, label='Target Trajectory')
 plt.title("3-DOF RRR Robot with Gradual Motion Tracking a Target")
 plt.legend()
