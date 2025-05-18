@@ -1,15 +1,17 @@
 version: '3.8'
 
 services:
-  rrr-tracker:
+  simulate:
+    profiles: ["sim"]
     build: 
       context: .
       dockerfile: .docker/Dockerfile
-    container_name: rrr_robot_container
+    container_name: Robot_RRR
     network_mode: host
     stdin_open: true
     tty: true
     ipc: host
+    command: ["python", "/app/src/Robot.py"]
     environment:
       - DISPLAY=${DISPLAY}
       - XAUTHORITY=${HOME}/.Xauthority
@@ -17,3 +19,24 @@ services:
       - .:/app
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ${HOME}/.Xauthority:${HOME}/.Xauthority
+
+  simulate-obstacle:
+    profiles: ["sim-obstacle"]
+    build: 
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: Robot_with_obstacle
+    network_mode: host
+    stdin_open: true
+    tty: true
+    ipc: host
+    command: ["python", "/app/src/Robot.py", "--obstacle"]
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=${HOME}/.Xauthority
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${HOME}/.Xauthority:${HOME}/.Xauthority
+    
+  

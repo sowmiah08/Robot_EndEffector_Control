@@ -1,17 +1,18 @@
 import numpy as np
 import matplotlib
-# matplotlib.use('TkAgg')
-try:
-    matplotlib.use('TkAgg')
-except ImportError:
-    print("⚠️ TkAgg not available, falling back to Agg.")
-    matplotlib.use('Agg')
+matplotlib.use('TkAgg')
+# try:
+#     matplotlib.use('TkAgg')
+# except ImportError:
+#     print("⚠️ TkAgg not available, falling back to Agg.")
+#     matplotlib.use('Agg')
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import pandas as pd
+import argparse
 
-def run_simulation(ax, target_rate, control_rate, label):
+def run_simulation(ax, target_rate, control_rate, label, with_obstacle=True):
     T = 5
     f = 5
     L1 = L2 = L3 = 1.0
@@ -74,7 +75,7 @@ def run_simulation(ax, target_rate, control_rate, label):
 
     for i in range(len(X_control)):
         raw_target = np.array([X_control[i], Y_control[i]])
-        repulsion = obstacle_repulsion(*raw_target)
+        repulsion = obstacle_repulsion(*raw_target) if with_obstacle else np.zeros(2)
         corrected_target = raw_target + repulsion
         t1, t2, t3 = theta_current
         x1 = L1 * np.cos(t1)
@@ -97,7 +98,7 @@ def run_simulation(ax, target_rate, control_rate, label):
         theta_derivative = (error - theta_prev_error) / dt
         theta_current += 0.08 * error + 0.00001 * theta_integral + 0.00002 * theta_derivative
         theta_prev_error = error
-        repulsion = obstacle_repulsion(*ee_pos)
+        repulsion = obstacle_repulsion(*ee_pos) if with_obstacle else np.zeros(2)
         if np.linalg.norm(repulsion) > 0:
             corrected_pos = ee_pos + repulsion
             ik_repel_solutions = ik_rrr_all(*corrected_pos)
@@ -112,8 +113,11 @@ def run_simulation(ax, target_rate, control_rate, label):
     ee_dot, = ax.plot([], [], 'bo', markersize=5)
     line, = ax.plot([], [], 'k-', lw=1.5)
     path, = ax.plot([], [], 'b--', alpha=0.3)
-    circle = plt.Circle(obstacle_center, obstacle_radius, color='r', alpha=0.3)
-    ax.add_patch(circle)
+    
+    if with_obstacle:
+        circle = plt.Circle(obstacle_center, obstacle_radius, color='r', alpha=0.3)
+        ax.add_patch(circle)
+
     ax.set_xlim(-1, 4)
     ax.plot(X_control, Y_control, 'g:', linewidth=1.5, label='Target Trajectory')
     ax.set_ylim(-2, 2)
@@ -150,15 +154,28 @@ def run_simulation(ax, target_rate, control_rate, label):
         blit=True,
         interval=1000 / control_rate
     )
-
     return ani
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--obstacle', action='store_true', help="Include obstacle in the simulation.")
+args = parser.parse_args()
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+if args.obstacle:
+    fig1, axs1 = plt.subplots(1, 2, figsize=(14, 6))
+    (ax1, ax2) = axs1
+    ani1 = run_simulation(ax1, target_rate=5, control_rate=50, label="With Obstacle: 5Hz / 50Hz", with_obstacle=True)
+    ani2 = run_simulation(ax2, target_rate=30, control_rate=1000, label="With Obstacle: 30Hz / 1000Hz", with_obstacle=True)
+    fig1.suptitle("Simulations With Obstacle", fontsize=16)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])  
+    plt.show()
+else:
+    fig2, axs2 = plt.subplots(1, 2, figsize=(14, 6))
+    (ax3, ax4) = axs2
+    ani3 = run_simulation(ax3, target_rate=5, control_rate=50, label="No Obstacle: 5Hz / 50Hz", with_obstacle=False)
+    ani4 = run_simulation(ax4, target_rate=30, control_rate=1000, label="No Obstacle: 30Hz / 1000Hz", with_obstacle=False)
+    fig2.suptitle("Simulations Without Obstacle", fontsize=16)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.show()
 
-ani1 = run_simulation(ax1, target_rate=5, control_rate=50, label="Target: 5Hz, Control: 50Hz")
-ani2 = run_simulation(ax2, target_rate=30, control_rate=1000, label="Target: 30Hz, Control: 1000Hz")
 
-plt.tight_layout()
-plt.show()
 
