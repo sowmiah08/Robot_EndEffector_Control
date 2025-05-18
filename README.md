@@ -76,8 +76,8 @@ Below are outputs from the Simulations.
 ### 🔹 Without Obstacle vs With Obstacle
 
 <p align="center">
-  <img src="Images/sim.png" width="45%" alt="RRR Simulation without obstacle"/>
-  <img src="Images/sim_obs.png" width="45%" alt="RRR Simulation with obstacle"/>
+  <img src="Output/sim.png" width="45%" alt="RRR Simulation without obstacle"/>
+  <img src="Output/sim_obs.png" width="45%" alt="RRR Simulation with obstacle"/>
 </p>
 
 ## Dependencies and System Requirements
