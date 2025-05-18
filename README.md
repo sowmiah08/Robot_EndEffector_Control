@@ -1,6 +1,6 @@
-# Robot End-Effector Control (RRR Planar Arm Simulation)
+# Robot End-Effector Control
 
-This project simulates a 3-DOF planar RRR (Revolute-Revolute-Revolute) robot arm tracking a moving target in 2D space. It includes inverse kinematics, PID control, and optional obstacle avoidance using repulsion. Animations are rendered using `matplotlib`.
+This project simulates a 3-DOF planar RRR (Revolute-Revolute-Revolute) robot arm tracking a moving target in 2D space. It includes inverse kinematics, PID control and optional obstacle avoidance using repulsion force field. Animations are created using `matplotlib`.
 
 ---
 
@@ -20,7 +20,7 @@ Robot_EndEffector_Control/
 
 ---
 
-## Features
+## Implementations
 
 - 2D Cartesian tracking of a moving sinusoidal target
 - Inverse kinematics solver for RRR manipulator
@@ -68,6 +68,17 @@ Two simulation configurations are supported:
 - **With obstacle**: Dynamically adjusts motion based on virtual repulsion from the obstacle.
 
 ---
+
+## Simulation Ouput
+
+Below are outputs from the Simulations.
+
+### 🔹 Without Obstacle vs With Obstacle
+
+<p align="center">
+  <img src="Images/sim.png" width="45%" alt="RRR Simulation without obstacle"/>
+  <img src="Images/sim_obs.png" width="45%" alt="RRR Simulation with obstacle"/>
+</p>
 
 ## Dependencies and System Requirements
 
