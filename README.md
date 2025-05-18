@@ -4,7 +4,7 @@ This project simulates a 3-DOF planar RRR (Revolute-Revolute-Revolute) robot arm
 
 ---
 
-## Project Structure
+## Directory Structure
 
 ```
 Robot_EndEffector_Control/
@@ -32,8 +32,7 @@ Robot_EndEffector_Control/
 
 ### Prerequisites
 
-- Ensure [Docker](https://www.docker.com/) is installed and running.
-- Docker compose is installed
+- Ensure docker and docker-compose is installed and running.
 
 ### Run with obstacle:
 
