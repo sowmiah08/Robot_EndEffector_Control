@@ -92,7 +92,7 @@ Two simulation configurations are used here and the ouputs are given below in th
 - **Without obstacle**: Simple target tracking using IK and PID.
 - **With obstacle**: Dynamically adjusts motion based on virtual repulsion from the obstacle.
 
-- **NOTE**: 
+**NOTE**: 
 - In the given Task, Target motion was given as (x, y) = (2L, L · sin(2πft)). Which means that X is constant and will travel in a straight line as seen from X-Axis. Y varies based on the X. But this does not look sinusoidal 
 as seen from XY Plane. This is assumed that the platform must be moving and hence the sinusoidal wave.  
 - The position for Obstacle was given as (x, y) = (L, 0.5L). This position according to out configuration is off the graph. The robot which follows  (x, y) = (2L, L · sin(2πft)) patgh never touches or interferes with the obstacle.
