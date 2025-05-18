@@ -75,6 +75,11 @@ Each code launches a side-by-side animation of the robot behavior at:
 
 ## Description of Our Approach
 
+Assumptions:
+- L1 = L2 = L3 = L = 1 (Considering the leghts of all links as same and equal)
+- Obstacle Centre = [2.0, 0.35]
+- Obstacle Radius = L/8
+
 This project simulates the Cartesian trajectory tracking of a 3-DOF planar RRR robotic manipulator. The robot is designed to follow a time-varying target in a 2D space using inverse kinematics and a basic PID joint controller. Key components of the simulation include:
 
 - **Trajectory Generation**: A sinusoidal path is generated for the end-effector using defined target frequency and duration.
@@ -83,9 +88,16 @@ This project simulates the Cartesian trajectory tracking of a 3-DOF planar RRR r
 - **Obstacle Avoidance**: An optional circular obstacle introduces repulsive forces near its boundary, modifying the target dynamically to avoid collisions.
 - **Visualization**: Real-time simulation is rendered using `matplotlib.animation`, showing the robot arm, target path, and end-effector trajectory.
 
-Two simulation configurations are supported:
+Two simulation configurations are used here and the ouputs are given below in the Simulation Outputs section.
 - **Without obstacle**: Simple target tracking using IK and PID.
 - **With obstacle**: Dynamically adjusts motion based on virtual repulsion from the obstacle.
+
+- **NOTE**: 
+- In the given Task, Target motion was given as (x, y) = (2L, L · sin(2πft)). Which means that X is constant and will travel in a straight line as seen from X-Axis. Y varies based on the X. But this does not look sinusoidal 
+as seen from XY Plane. This is assumed that the platform must be moving and hence the sinusoidal wave.  
+- The position for Obstacle was given as (x, y) = (L, 0.5L). This position according to out configuration is off the graph. The robot which follows  (x, y) = (2L, L · sin(2πft)) patgh never touches or interferes with the obstacle.
+Hence a different Obstacle position was chosen to demonstarte the obstacle avoidance algorithm. The position assumed was (2.0, 0.35) for better Visualization. 
+
 
 ---
 
