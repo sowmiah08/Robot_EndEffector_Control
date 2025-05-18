@@ -12,13 +12,8 @@ services:
     ipc: host
     environment:
       - DISPLAY=${DISPLAY}
-      - QT_X11_NO_MITSHM=1
       - XAUTHORITY=${HOME}/.Xauthority
     volumes:
       - .:/app
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ${HOME}/.Xauthority:${HOME}/.Xauthority
-      - /usr/share/vulkan:/usr/share/vulkan:ro
-      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
-      - ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native
-      - /run/user/${UID}/pulse:/run/user/${UID}/pulse
