@@ -83,17 +83,17 @@ Below are outputs from the Simulations.
 ## Dependencies and System Requirements
 
 Python Requirements:
-numpy 
-scipy 
-matplotlib
-pandas 
-openpyxl 
+- numpy 
+- scipy 
+- matplotlib
+- pandas 
+- openpyxl 
 
 Tested On:
-OS : Ubuntu 24.04
-IDE: VS Code
-GPU: 5090
-CPU: AMD 9950X3D
-RAM: 96GB RAM
+- OS : Ubuntu 24.04
+- IDE: VS Code
+- GPU: 5090
+- CPU: AMD 9950X3D
+- RAM: 96GB RAM
 
 ---
