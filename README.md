@@ -8,12 +8,14 @@ This project simulates a 3-DOF planar RRR (Revolute-Revolute-Revolute) robot arm
 
 ```
 Robot_EndEffector_Control/
-├── docker-compose.yml         # Docker Compose for running simulation
-├── Dockerfile                 # Python-based simulation image
-├── requirements.txt           # Python dependencies
-├── README.md                  # Project documentation
+├── docker-compose.yml                                      # Docker Compose for running simulation
+├── Intern Challenge_ RRR Robot End-Effector Control.pdf    # Internship - Question
+├── Dockerfile                                              # Python-based simulation image
+├── requirements.txt                                        # Python dependencies
+├── README.md                                               # Project documentation
 └── src/
-    └── Robot.py               # Main simulation script
+    ├── Robot.py                                            # Main script
+    └── sim.py                                              # Simulator Class
 ```
 
 ---
@@ -28,7 +30,7 @@ Robot_EndEffector_Control/
 
 ---
 
-## Running the Simulation
+## Setup and Run the Code
 
 ### Prerequisites
 
@@ -49,4 +51,38 @@ Each launches a side-by-side animation of the robot behavior at:
 - 5 Hz target / 50 Hz control rate
 - 30 Hz target / 1000 Hz control rate
 
+---
 
+## Description of Our Approach
+
+This project simulates the Cartesian trajectory tracking of a 3-DOF planar RRR robotic manipulator. The robot is designed to follow a time-varying target in a 2D space using inverse kinematics and a basic PID joint controller. Key components of the simulation include:
+
+- **Trajectory Generation**: A sinusoidal path is generated for the end-effector using defined target frequency and duration.
+- **Inverse Kinematics (IK)**: The system computes all valid joint configurations for a given target using closed-form solutions for the planar RRR arm.
+- **PID Controller**: Joint angles are regulated using a proportional–integral–derivative control loop that attempts to minimize error over time.
+- **Obstacle Avoidance**: An optional circular obstacle introduces repulsive forces near its boundary, modifying the target dynamically to avoid collisions.
+- **Visualization**: Real-time simulation is rendered using `matplotlib.animation`, showing the robot arm, target path, and end-effector trajectory.
+
+Two simulation configurations are supported:
+- **Without obstacle**: Simple target tracking using IK and PID.
+- **With obstacle**: Dynamically adjusts motion based on virtual repulsion from the obstacle.
+
+---
+
+## Dependencies and System Requirements
+
+Python Requirements:
+numpy 
+scipy 
+matplotlib
+pandas 
+openpyxl 
+
+Tested On:
+OS : Ubuntu 24.04
+IDE: VS Code
+GPU: 5090
+CPU: AMD 9950X3D
+RAM: 96GB RAM
+
+---
