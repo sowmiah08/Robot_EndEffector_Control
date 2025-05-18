@@ -20,6 +20,26 @@ Robot_EndEffector_Control/
 
 ---
 
+## Dependencies and System Requirements
+
+Python Requirements:
+- numpy 
+- scipy 
+- matplotlib
+- pandas 
+- openpyxl 
+
+All the requirements are installed inside the docker container. Hence no local installation is required for this to run. 
+
+Tested On:
+- OS : Ubuntu 24.04
+- IDE: VS Code
+- GPU: RTX 5090
+- CPU: AMD 9950X3D
+- RAM: 96GB RAM
+
+---
+
 ## Implementations
 
 - 2D Cartesian tracking of a moving sinusoidal target
@@ -34,7 +54,7 @@ Robot_EndEffector_Control/
 
 ### Prerequisites
 
-- Ensure docker and docker-compose is installed and running.
+- Ensure docker and docker-compose is installed locally.
 
 ### Run with obstacle:
 
@@ -47,7 +67,7 @@ docker compose --profile sim-obstacle up --build
 docker compose --profile sim up --build
 ```
 
-Each launches a side-by-side animation of the robot behavior at:
+Each code launches a side-by-side animation of the robot behavior at:
 - 5 Hz target / 50 Hz control rate
 - 30 Hz target / 1000 Hz control rate
 
@@ -80,20 +100,6 @@ Below are outputs from the Simulations.
   <img src="Output/sim_obs.png" width="45%" alt="RRR Simulation with obstacle"/>
 </p>
 
-## Dependencies and System Requirements
-
-Python Requirements:
-- numpy 
-- scipy 
-- matplotlib
-- pandas 
-- openpyxl 
-
-Tested On:
-- OS : Ubuntu 24.04
-- IDE: VS Code
-- GPU: 5090
-- CPU: AMD 9950X3D
-- RAM: 96GB RAM
+From the Figure, We can confirm the working of Obstacle avoidance. If an obstacle is detected, the imaginary force field will repel the End-Effector and thus avoiding the collision with the obstacle. 
 
 ---
