@@ -78,7 +78,7 @@ Each code launches a side-by-side animation of the robot behavior at:
 Assumptions:
 - L1 = L2 = L3 = L = 1 (Considering the leghts of all links as same and equal)
 - Obstacle Centre = [2.0, 0.35]
-- Obstacle Radius = L/8
+- Obstacle Radius = 0.125 
 
 This project simulates the Cartesian trajectory tracking of a 3-DOF planar RRR robotic manipulator. The robot is designed to follow a time-varying target in a 2D space using inverse kinematics and a basic PID joint controller. Key components of the simulation include:
 
